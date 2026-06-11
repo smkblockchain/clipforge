@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ClipForge — Autorización TikTok</title>
+<style>
+  body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#0f1115;color:#e8eaf0;line-height:1.6;display:flex;min-height:100vh;align-items:center;justify-content:center}
+  .box{max-width:560px;padding:32px;text-align:center}
+  h1{font-size:24px;margin:0 0 8px}
+  p{color:#9aa3b2}
+  .code{user-select:all;word-break:break-all;background:#171a21;border:1px solid #2a2f3a;border-radius:10px;padding:14px;margin:16px 0;font-family:ui-monospace,Menlo,monospace;font-size:14px;color:#7CFFB2}
+  button{background:#ff3b6b;color:#fff;border:0;border-radius:10px;padding:12px 20px;font-size:15px;font-weight:700;cursor:pointer}
+  .err{color:#ff6b6b}
+</style>
+</head>
+<body>
+<div class="box">
+  <h1>🔗 Autorización de TikTok</h1>
+  <div id="content"><p>Procesando…</p></div>
+</div>
+<script>
+  const q = new URLSearchParams(location.search);
+  const code = q.get('code');
+  const err = q.get('error') || q.get('error_description');
+  const c = document.getElementById('content');
+  if (code) {
+    c.innerHTML = '<p>Copia este código y pégalo en ClipForge para terminar de conectar tu cuenta:</p>'
+      + '<div class="code" id="cd">' + code + '</div>'
+      + '<button onclick="navigator.clipboard.writeText(document.getElementById(\'cd\').innerText);this.innerText=\'¡Copiado!\'">Copiar código</button>'
+      + '<p style="margin-top:18px;font-size:13px">Ya puedes cerrar esta pestaña.</p>';
+  } else if (err) {
+    c.innerHTML = '<p class="err">No se pudo autorizar: ' + err + '</p><p>Vuelve a intentarlo desde ClipForge.</p>';
+  } else {
+    c.innerHTML = '<p>Esta página recibe la autorización de TikTok. Llega aquí desde el flujo de conexión de ClipForge.</p>';
+  }
+</script>
+</body>
+</html>
